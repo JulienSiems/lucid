@@ -59,5 +59,5 @@ class Model(object):
         'importing multiple instances of the model.') % scope
     t_input, t_prep_input = self.create_input(t_input, forget_xy_shape)
     tf.import_graph_def(
-        self.graph_def, {self.input_name: t_prep_input}, name=scope)
+        self.graph_def, {self.input_name: tf.cast(t_prep_input*255, dtype=tf.uint8)}, name=scope)
     self.post_import(scope)
